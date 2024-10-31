@@ -150,17 +150,23 @@ footer p {
     #container {
         padding: 1rem;
         gap: 1rem;
+        display: flex;
+        flex-direction: column; /* Força os cartões a ocuparem toda a largura */
+        align-items: center;
     }
 
     .cartao {
         flex-basis: 100%; /* Cartões ocupam toda a largura em telas pequenas */
+        max-width: 100%; /* Remove qualquer limitação de largura */
     }
 
     .cartao__conteudo h3 {
-        font-size: 3vw; /* Ajuste de tamanho para telas pequenas */
+        font-size: 4vw; /* Aumentado para legibilidade em telas pequenas */
+        margin: 0.5rem; /* Adiciona margem para separação */
     }
 
     .cartao__conteudo p {
-        font-size: 3.8vw; /* Ajuste de tamanho para telas pequenas */
+        font-size: 4.5vw; /* Aumentado para legibilidade */
+        margin: 0.5rem; /* Adiciona margem para separação */
     }
 }
