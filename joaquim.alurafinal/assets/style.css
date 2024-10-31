@@ -1,0 +1,166 @@
+:root {
+    --text-color: #A3C6A5; /* Verde suave */
+    --card-front-color: rgba(10, 43, 83, 0.8); /* Azul com 80% de opacidade */
+    --card-back-color: rgba(190, 168, 120, 0.575); /* Azul com 80% de opacidade (azul ao virar) */
+    --back-text-color: #00FFFF; /* Azul ciano para o texto da parte de trás */
+    --shadow-color: rgba(0, 0, 0, 0.2); /* Cor da sombra */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: url('img/bg-desktop.webp') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Quicksand', sans-serif; /* Fonte principal */
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    image-rendering: -webkit-optimize-contrast; /* Melhora a qualidade da imagem */
+    image-rendering: crisp-edges; /* Garante nitidez */
+}
+
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1200px;
+    padding: 2rem;
+    gap: 2rem;
+    width: 100%;
+}
+
+.cartao {
+    margin: 1rem;
+    height: 18rem; /* Altura do cartão */
+    flex-basis: calc(50% - 2rem); /* Cartões ocupam 50% da largura para duas fileiras */
+    max-width: 250px; /* Aumentado para 250px */
+    min-width: 200px; /* Aumentado para 200px */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 200ms ease; /* Transição suave */
+    perspective: 1000px; /* Adicionado para efeito 3D */
+}
+
+.cartao:hover {
+    transform: scale(1.05); /* Aumenta ligeiramente o cartão ao passar o mouse */
+}
+
+.cartao__conteudo {
+    background-color: var(--card-front-color); /* Azul transparente */
+    text-align: center;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 300ms ease-in-out;
+    position: relative; /* Posicionamento relativo para contornos */
+    border-radius: 15px; /* Arredondamento das bordas */
+    box-shadow: 0 4px 10px var(--shadow-color); /* Sombra do cartão */
+    display: flex; /* Flexbox para alinhar conteúdo */
+    flex-direction: column; /* Direção do conteúdo */
+    justify-content: center; /* Centraliza verticalmente */
+}
+
+.cartao__conteudo h3 {
+    color: var(--text-color);
+    border: 1px solid var(--text-color); /* Borda sólida */
+    text-align: center; /* Centraliza o texto */
+    padding: 0.5rem;
+    margin: 0.6rem 0; /* Margem apenas vertical */
+    border-radius: 10px; /* Arredondamento das bordas */
+    font-size: 1.2vw; /* Aumentado para melhor legibilidade */
+    background-color: rgba(255, 255, 255, 0.2); /* Fundo branco semi-transparente */
+}
+
+.cartao__conteudo p {
+    padding: 1rem; /* Ajustado para manter espaçamento */
+    font-size: 1.4vw;
+    color: var(--card-back-color); /* Cor do texto */
+}
+
+.cartao__conteudo__pergunta {
+    display: flex; /* Flex para centralizar o conteúdo */
+    flex-direction: column; /* Direção vertical */
+    align-items: center; /* Centraliza horizontalmente */
+    justify-content: center; /* Centraliza verticalmente */
+    backface-visibility: hidden; /* Garante que o conteúdo da pergunta não seja visível ao girar */
+}
+
+.cartao__conteudo__resposta {
+    backface-visibility: hidden; /* Garante que o conteúdo da resposta não seja visível ao girar */
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    transform: rotateY(180deg);
+    background-color: #005B99; /* Cor sólida para o fundo do cartão de resposta (azul mais escuro) */
+    border: 4px solid #00FFFF; /* Borda azul ciano mais pronunciada */
+    border-radius: 15px; /* Arredondamento das bordas */
+    display: flex; /* Flexbox para alinhar o conteúdo */
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    color: #FFFFFF; /* Cor do texto da resposta (branco) */
+    font-size: 1.4vw; /* Ajuste de tamanho do texto para maior legibilidade */
+    opacity: 0; /* Começa invisível */
+    transition: opacity 200ms ease; /* Transição suave de opacidade */
+}
+
+.cartao__conteudo__resposta h3 {
+    color: var(--back-text-color); /* Azul ciano para o texto da parte de trás */
+}
+
+.cartao.active .cartao__conteudo {
+    transform: rotateY(180deg); /* Rotaciona o conteúdo do cartão */
+}
+
+.cartao.active .cartao__conteudo__pergunta {
+    display: none; /* Esconde o conteúdo da pergunta quando ativo */
+}
+
+.cartao.active .cartao__conteudo__resposta {
+    opacity: 1; /* Torna a resposta visível quando o cartão está ativo */
+}
+
+footer {
+    background-color: black;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 2rem;
+}
+
+footer p {
+    text-align: center;
+    font-size: 0.8rem; /* Aumentado para melhor leitura */
+    margin-top: 0.5rem;
+}
+
+@media (max-width: 560px) {
+    body {
+        background: url('img/bg-mobile.webp') no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    #container {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .cartao {
+        flex-basis: 100%; /* Cartões ocupam toda a largura em telas pequenas */
+    }
+
+    .cartao__conteudo h3 {
+        font-size: 3vw; /* Ajuste de tamanho para telas pequenas */
+    }
+
+    .cartao__conteudo p {
+        font-size: 3.8vw; /* Ajuste de tamanho para telas pequenas */
+    }
+}
